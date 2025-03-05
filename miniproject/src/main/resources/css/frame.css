@@ -1,0 +1,41 @@
+.root {
+  -fx-background-color: #161c26;  
+}
+
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("/font/ZFTERMIN__.ttf") format("truetype");
+}
+
+
+.Button-style {
+  -fx-background-color: #4a4a4a; 
+  -fx-text-fill: white; 
+  -fx-border-radius: 5px;
+  -fx-padding: 10px 20px;
+  -fx-border-color: #ffff;
+}
+
+.Button-style:hover {
+  -fx-background-color: #2f2f2f;
+  -fx-border-color: #ffff;
+}
+
+
+
+
+/*.image-view {
+  -fx-image: url("image/2.png"); 
+  -fx-fit-width: 200px; 
+  -fx-fit-height: 200px;
+}*/
+
+
+
+/*.label-style {
+  -fx-font-family: "MyCustomFont";
+  -fx-font-size: 20px; 
+  -fx-text-fill: #ffffff; 
+}*/
+
+
