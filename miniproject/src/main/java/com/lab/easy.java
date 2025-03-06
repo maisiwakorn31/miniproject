@@ -28,12 +28,15 @@ public class easy extends Application {
     @Override
     public void start(Stage stage) {
         currentStage = stage;
-
+    
         AnchorPane root = new AnchorPane();
         GridPane grid = new GridPane();
         grid.setHgap(5);
         grid.setVgap(5);
-
+    
+        
+        grid.setPrefSize(900, 600); 
+        
     
         double buttonSize = 900.0 / SIZE;
         for (int row = 0; row < SIZE; row++) {
@@ -42,43 +45,40 @@ public class easy extends Application {
                 button.setPrefSize(buttonSize, buttonSize); 
                 button.setFont(Font.font(16));
                 button.setStyle("-fx-background-color: #4a4a4a; -fx-text-fill: white;");
-                
+    
                 final int r = row, c = col;
                 button.setOnAction(e -> handleButtonClick(r, c));
                 buttons[row][col] = button;
                 grid.add(button, col, row);
             }
         }
-
-  
+    
         timerText = new Text("Time: 0");
         timerText.setX(10);
         timerText.setY(10);
-
+    
         root.getChildren().addAll(grid, timerText);
-
+    
         placeBombs();
-
-
         calculateAdjacentBombs();
-
-
+    
         startTime = System.nanoTime();
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 long elapsedTime = (now - startTime) / 1000000000;
                 timerText.setText("Time: " + elapsedTime);
+                
             }
         };
         timer.start();
-
-
-        Scene scene = new Scene(root, 900, 600);
+    
+        Scene scene = new Scene(root, 900, 600); 
         stage.setScene(scene);
         stage.setTitle("Easy Mode");
         stage.show();
     }
+    
 
     private void handleButtonClick(int row, int col) {
         if (bombs[row][col]) {
@@ -159,11 +159,11 @@ public class easy extends Application {
     }
 
     private void showGameOverDialog(boolean won) {
-        String message = won ? "You Win!" : "You Lost!";
+        String message = won ? "ชนะแล้วเก่งมากเลย" : "สมน้ำหน้าแพ้แล้ว5555";
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText(message);
-        alert.setContentText("play New Game???");
+        alert.setContentText("New Game");
         //ButtonType playAgainButton = new ButtonType("PlayAgain");
         ButtonType mainMenuButton = new ButtonType("NewGame");
 

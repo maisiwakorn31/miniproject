@@ -68,7 +68,6 @@ public class medium extends Application {
         };
         timer.start();
 
-        
         Scene scene = new Scene(root, 900, 600);
         stage.setScene(scene);
         stage.setTitle("Medium Mode");
@@ -153,23 +152,19 @@ public class medium extends Application {
     }
 
     private void showGameOverDialog(boolean won) {
-        String message = won ? "You Win!" : "You Lost!";
+        String message = won ? "ชนะแล้วเก่งมากเลย" : "สมน้ำหน้าแพ้แล้ว5555";
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText(message);
-        alert.setContentText("play New Game???");
-        //ButtonType playAgainButton = new ButtonType("PlayAgain");
+        alert.setContentText("New Game");
         ButtonType mainMenuButton = new ButtonType("NewGame");
 
-        alert.getButtonTypes().setAll( mainMenuButton);
+        alert.getButtonTypes().setAll(mainMenuButton);
         alert.showAndWait().ifPresent(response -> {
-            /*if (response == playAgainButton) {
-                restartGame();
-            }*/  if (response == mainMenuButton) {
+            if (response == mainMenuButton) {
                 try {
                     goToMainMenu();
                 } catch (Exception e) {
-
                     e.printStackTrace();
                 }
             } else {

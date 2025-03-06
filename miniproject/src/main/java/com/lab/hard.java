@@ -30,36 +30,38 @@ public class hard extends Application {
     @Override
     public void start(Stage stage) {
         currentStage = stage;
-
+    
         AnchorPane root = new AnchorPane();
         GridPane grid = new GridPane();
         grid.setHgap(5);
         grid.setVgap(5);
-
-        double buttonSize = 900.0 / SIZE_X;
+    
+        
+        double buttonWidth = 900.0 / SIZE_X;
+        double buttonHeight = 600.0 / SIZE_Y;
         for (int row = 0; row < SIZE_Y; row++) {
             for (int col = 0; col < SIZE_X; col++) {
                 Button button = new Button();
-                button.setPrefSize(buttonSize, buttonSize);
+                button.setPrefSize(buttonWidth, buttonHeight); 
                 button.setFont(Font.font(16));
                 button.setStyle("-fx-background-color: #4a4a4a;-fx-text-fill: white;");
-
+    
                 final int r = row, c = col;
                 button.setOnAction(e -> handleButtonClick(r, c));
                 buttons[c][r] = button;
                 grid.add(button, col, row);
             }
         }
-
+    
         timerText = new Text("Time: 0");
         timerText.setX(10);
         timerText.setY(10);
-
+    
         root.getChildren().addAll(grid, timerText);
-
+    
         placeBombs();
         calculateAdjacentBombs();
-
+    
         startTime = System.nanoTime();
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -69,16 +71,19 @@ public class hard extends Application {
             }
         };
         timer.start();
-
+    
+        
         Scene scene = new Scene(root, 900, 600);
         stage.setScene(scene);
         stage.setTitle("Hard Mode");
         stage.show();
     }
+    
 
     private void handleButtonClick(int row, int col) {
         if (bombs[col][row]) {
             buttons[col][row].setText("B");
+            buttons[col][row].setStyle("-fx-background-color: red; -fx-text-fill: red;");
             showGameOverDialog(false);
         } else {
             revealCell(row, col);
@@ -153,11 +158,11 @@ public class hard extends Application {
     }
 
     private void showGameOverDialog(boolean won) {
-        String message = won ? "You Win!" : "You Lost!";
+        String message = won ? "ชนะแล้วเก่งมากเลย" : "สมน้ำหน้าแพ้แล้ว5555";
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText(message);
-        alert.setContentText("play New Game???");
+        alert.setContentText("New Game");
         //ButtonType playAgainButton = new ButtonType("PlayAgain");
         ButtonType mainMenuButton = new ButtonType("NewGame");
 

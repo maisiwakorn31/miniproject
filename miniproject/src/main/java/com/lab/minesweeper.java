@@ -90,12 +90,12 @@ public class minesweeper extends Application{
 
   private void launchGame(Class<? extends Application> gameClass) {
     try {
-        // Close the current window (this will hide the current stage)
+        
         if (stage != null) {
           stage.close();
       }
 
-        // Launch the new game
+        
         Application gameApp = gameClass.getDeclaredConstructor().newInstance();
         Stage newStage = new Stage();
         gameApp.start(newStage);
