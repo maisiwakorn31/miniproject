@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class minesweeper extends Application{
+
+  private Stage stage;
     
     public static void main(String[] args) {
         Application.launch(args);
@@ -88,15 +90,21 @@ public class minesweeper extends Application{
 
   private void launchGame(Class<? extends Application> gameClass) {
     try {
+        // Close the current window (this will hide the current stage)
+        if (stage != null) {
+          stage.close();
+      }
+
+        // Launch the new game
         Application gameApp = gameClass.getDeclaredConstructor().newInstance();
         Stage newStage = new Stage();
-        
-
         gameApp.start(newStage);
+
     } catch (Exception e) {
         e.printStackTrace();
     }
 }
+
 
 
 

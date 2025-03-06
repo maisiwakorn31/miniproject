@@ -41,6 +41,8 @@ public class easy extends Application {
                 Button button = new Button();
                 button.setPrefSize(buttonSize, buttonSize); 
                 button.setFont(Font.font(16));
+                button.setStyle("-fx-background-color: #4a4a4a; -fx-text-fill: white;");
+                
                 final int r = row, c = col;
                 button.setOnAction(e -> handleButtonClick(r, c));
                 buttons[row][col] = button;
@@ -74,7 +76,7 @@ public class easy extends Application {
 
         Scene scene = new Scene(root, 900, 600);
         stage.setScene(scene);
-        stage.setTitle("Easy Minesweeper");
+        stage.setTitle("Easy Mode");
         stage.show();
     }
 
@@ -157,19 +159,19 @@ public class easy extends Application {
     }
 
     private void showGameOverDialog(boolean won) {
-        String message = won ? "You Win!" : "Game Over! You Lost!";
+        String message = won ? "You Win!" : "You Lost!";
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText(message);
-        alert.setContentText("Do you want to play again?");
-        ButtonType playAgainButton = new ButtonType("Play Again");
-        ButtonType mainMenuButton = new ButtonType("Main Menu");
+        alert.setContentText("play New Game???");
+        //ButtonType playAgainButton = new ButtonType("PlayAgain");
+        ButtonType mainMenuButton = new ButtonType("NewGame");
 
-        alert.getButtonTypes().setAll(playAgainButton, mainMenuButton);
+        alert.getButtonTypes().setAll( mainMenuButton);
         alert.showAndWait().ifPresent(response -> {
-            if (response == playAgainButton) {
+            /*if (response == playAgainButton) {
                 restartGame();
-            } else if (response == mainMenuButton) {
+            }*/  if (response == mainMenuButton) {
                 try {
                     goToMainMenu();
                 } catch (Exception e) {
@@ -183,13 +185,14 @@ public class easy extends Application {
     }
 
     private void restartGame() {
-        start(new Stage());
+        currentStage.close(); 
+        start(new Stage()); 
     }
 
     private void goToMainMenu() throws Exception {
 
         currentStage.close();
-        new minesweeper().start(new Stage());
+        new minesweeper();
     }
 
 }

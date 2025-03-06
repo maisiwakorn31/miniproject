@@ -39,7 +39,9 @@ public class medium extends Application {
             for (int col = 0; col < SIZE; col++) {
                 Button button = new Button();
                 button.setPrefSize(buttonSize, buttonSize);
-                button.setFont(Font.font(16)); 
+                button.setFont(Font.font(16));
+                button.setStyle("-fx-background-color: #4a4a4a;-fx-text-fill: white;");
+ 
                 final int r = row, c = col;
                 button.setOnAction(e -> handleButtonClick(r, c));
                 buttons[row][col] = button;
@@ -66,17 +68,16 @@ public class medium extends Application {
         };
         timer.start();
 
-        // Game scene setup
+        
         Scene scene = new Scene(root, 900, 600);
         stage.setScene(scene);
-        stage.setTitle("Medium Minesweeper");
+        stage.setTitle("Medium Mode");
         stage.show();
     }
 
     private void handleButtonClick(int row, int col) {
         if (bombs[row][col]) {
             buttons[row][col].setText("B");
-            buttons[row][col].setStyle("-fx-base: red;");
             showGameOverDialog(false);
         } else {
             revealCell(row, col);
@@ -152,19 +153,19 @@ public class medium extends Application {
     }
 
     private void showGameOverDialog(boolean won) {
-        String message = won ? "You Win!" : "Game Over! You Lost!";
+        String message = won ? "You Win!" : "You Lost!";
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText(message);
-        alert.setContentText("Do you want to play again?");
-        ButtonType playAgainButton = new ButtonType("Play Again");
-        ButtonType mainMenuButton = new ButtonType("Main Menu");
+        alert.setContentText("play New Game???");
+        //ButtonType playAgainButton = new ButtonType("PlayAgain");
+        ButtonType mainMenuButton = new ButtonType("NewGame");
 
-        alert.getButtonTypes().setAll(playAgainButton, mainMenuButton);
+        alert.getButtonTypes().setAll( mainMenuButton);
         alert.showAndWait().ifPresent(response -> {
-            if (response == playAgainButton) {
+            /*if (response == playAgainButton) {
                 restartGame();
-            } else if (response == mainMenuButton) {
+            }*/  if (response == mainMenuButton) {
                 try {
                     goToMainMenu();
                 } catch (Exception e) {
@@ -178,13 +179,12 @@ public class medium extends Application {
     }
 
     private void restartGame() {
+        currentStage.close();
         start(new Stage());
     }
 
     private void goToMainMenu() throws Exception {
         currentStage.close();
-    
-        Stage mainMenuStage = new Stage();
-        new minesweeper().start(mainMenuStage);
+        new minesweeper();
     }
 }
